@@ -7,7 +7,7 @@ class Transaction {
       this.fromAddress = fromAddress;
       this.toAddress = toAddress;
       this.amount = amount;
-      this.timestamp = Date.now(); // need to consider timezone?
+      this.timestamp = Date.now(); // todo: to consider timezone later
     }
   
     calculateHash() {
@@ -15,7 +15,6 @@ class Transaction {
     }
   
     signTransaction(signingKey) {
-      // from the wallet that is linked to your key
       if (signingKey.getPublic('hex') !== this.fromAddress) {
         throw new Error('You cannot sign transactions for other wallets!');
       }
@@ -26,13 +25,10 @@ class Transaction {
       this.signature = sig.toDER('hex');
     }
   
-    /**
-     * Checks if the signature is valid (transaction has not been tampered with).
-     * It uses the fromAddress as the public key.
-     */
+     // Checks if the signature is valid
     isValid() {
       // mining reward transaction doesn't have a from address
-      if (this.fromAddress === null) return true; // need other checks later: reward...
+      if (this.fromAddress === null) return true; // todo: need other checks later: reward...
   
       if (!this.signature || this.signature.length === 0) {
         throw new Error('No signature in this transaction');
