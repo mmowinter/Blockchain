@@ -26,8 +26,8 @@ TYMECoin.addTransaction(tx2);
 // Mine block
 TYMECoin.minePendingTransactions(myWalletAddress);
 
-// console.log(`Balance of wallet is ${TYMECoin.getBalanceOfAddress(myWalletAddress)}`);
-// console.log(`TXs of wallet is ${JSON.stringify(TYMECoin.getAllTransactionsForWallet(myWalletAddress), null, '\t')}`);
+console.log(`Balance of wallet is ${TYMECoin.getBalanceOfAddress(myWalletAddress)}`);
+console.log(`TXs of wallet is ${JSON.stringify(TYMECoin.getAllTransactionsForWallet(myWalletAddress), null, '\t')}`);
 
 // Uncomment this line to check tampering
 // TYMECoin.chain[1].transactions[0].amount = 1000;

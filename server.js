@@ -8,6 +8,10 @@ router.get('/',function(req,res){
   res.sendFile(path.join(__dirname+'/src/public/wallet.html'));
   //__dirname : It will resolve to your project folder.
 });
+router.get('/dashboard',function(req,res){
+  res.sendFile(path.join(__dirname+'/src/public/dashboard.html'));
+  //__dirname : It will resolve to your project folder.
+});
 
 router.get('/public_key', function(req,res) {
     // Use secp256k1
