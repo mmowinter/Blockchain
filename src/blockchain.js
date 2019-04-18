@@ -5,13 +5,16 @@ class Blockchain {
   constructor() {
     this.chain = [this.createGenesisBlock()];
     this.difficulty = 2;            // todo: move to config file
-    this.miningReward = 10;         // todo: move to config file, add more logic later
+    this.miningReward = 0;         // todo: move to config file, add more logic later
     this.pendingTransactions = [];
     // todo: store TXs which missed their parents
   }
 
   createGenesisBlock() {
-    return new Block(Date.parse('2019-04-19'), 'Genesis TYME Coin', '0'); // todo: move to config file
+    let address = '04be128292e3850bb1ec167835d8dae5be4cec21c38b5951a565205c0597a2f7cff12fcc2626e22769d084576f9267db0b3f3157c0b9382220ad47c21cd180fc8f';
+    //pK: 5970ca079d3a4b877e560f8f9f14233299c1b479a95ba1000bd421300bc6cfa5
+    const genesisTx = new Transaction(null, address, 1000000);
+    return new Block(Date.parse('2019-04-19'), [genesisTx], '0');
   }
 
   getLatestBlock() {
@@ -25,6 +28,7 @@ class Blockchain {
     // todo: process some pending txs, not all pending txs
     let block = new Block(Date.now(), this.pendingTransactions, this.getLatestBlock().hash);
     block.mineBlock(this.difficulty);
+    block.heigh = this.getLatestBlock().heigh+1;
     this.chain.push(block);
     this.pendingTransactions = [];
   }
@@ -35,11 +39,21 @@ class Blockchain {
     }
 
     // Verify the transactiion
+    if(this.getBalanceOfAddress(transaction.fromAddress) < transaction.amount)
+    {
+      throw new Error('Balance amount must not be less than transaction amount');
+    }
+
     if (!transaction.isValid()) {
       throw new Error('Cannot add invalid transaction to chain');
     }
 
     this.pendingTransactions.push(transaction);
+  }
+
+  getPendingTransaction()
+  {
+    return this.pendingTransactions;
   }
 
   getBalanceOfAddress(address) {

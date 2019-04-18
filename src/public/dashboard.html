@@ -4,43 +4,53 @@
     <title> Tyme Coin Dashboard</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>   
     <script>
+        $( document ).ready(function() {
+            console.log("document ready!" );
+            $.ajax({
+                url: "/unconfirmed_transactions",
+                success: function( result ) {
+                    console.log(result);
+                }
+            });
+        });
+
     </script>
 </head>
 <body>
   <div id="content">
     <div id="head">
-        <img src="../" alt="Tyme Coin Dashboard"> 
+        <img src="./img" alt="tyme icon" style="widows: 64px;;height:64px;"> 
+        <span style="font-size: 22px;"> TYME Coin Dashboard</span>
     </div>
     <div id="body">
         <div id="block-info">
-            <span>Block</span>
+            <span>BLOCKS</span>
             <table border="1">
                    <tr>
-                    <th>Index</th>
-                       <th>Hash</th>
-                       <th>Time</th>
+                       <th>Height</th>
+                       <th>Age</th>
+                       <th>Transactions</th>
+                       <th>Miner</th>
+                       <th>Miner</th>
+                       <th>Size (bytes)</th>
                    </tr> 
                    <tr>
-                    <td>1</td>
-                       <td>hash</td>
-                       <td>Time</td>
                    </tr>
             </table>
         </div>
+    </br>
         <div id="transaction-info">
-            <span>Transaction</span>
+            <span>TRANSACTIONS</span>
             <table border="1">
                    <tr>
+                       <th>Transaction Hash</th>
                        <th>From</th>
                        <th>To</th>
                        <th>Amount</th>
                        <th>Time</th>
                    </tr> 
                    <tr>
-                    <td>from</td>
-                    <td>to</td>
-                    <td>amount</td>
-                    <td>time</td>
+
                    </tr>
             </table>
         </div>

@@ -4,7 +4,7 @@ const EC = require('elliptic').ec;
 const ec = new EC('secp256k1');
 
 // the private key and public key go here
-const myKey = ec.keyFromPrivate('9cf0026688cdae5816f65d6517e2ed2880f8d130c847e2382b9550389950822f');
+const myKey = ec.keyFromPrivate('5970ca079d3a4b877e560f8f9f14233299c1b479a95ba1000bd421300bc6cfa5');
 const myWalletAddress = myKey.getPublic('hex');
 
 // Create new instance of Blockchain class

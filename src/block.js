@@ -7,6 +7,7 @@ class Block {
       this.transactions = transactions;
       this.nonce = 0;
       this.hash = this.calculateHash();
+      this.heigh = 0;
     }
   
     calculateHash() {
@@ -18,7 +19,7 @@ class Block {
         this.nonce++;
         this.hash = this.calculateHash();
       }
-  
+      
       console.log(`Block mined: ${this.hash}`);
     }
   
