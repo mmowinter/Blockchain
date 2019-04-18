@@ -4,16 +4,18 @@
     <title> Tyme Coin Wallet!</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>   
     <script>
-        $(document).ready(function(){
+        function generateKey(){
             $.ajax({
                 url: "/public_key",
                 success: function( result ) {
-                    $("#publicKey").html(result);
+                    $("#public-key").html(result[0]);
+                    $("#private-key").html(result[1]);
                 }
             });
 
-            $("#publicKey").html("Loading...");
-        });
+            $("#public-key").html("Loading...");
+            $("#private-key").html("Loading...");
+        }
     </script>
 </head>
 <body>
@@ -22,13 +24,16 @@
         <img src="../" alt="Tyme header"> 
     </div>
     <div id="body">
-        <div id="publicKey"></div>
-        <div id="private"></div>
+        <span>Public Key: </span><br/>
+        <span id="public-key"></span><br/>
+        
+        <span>Private Key: </span><br/>
+        <span id="private-key"></span>
         <div id="generate-key">
-            <button id="btn-key" name="btn-key" value="Generate" onclick="generateKey();"/>
+            <button id="btn-key" name="btn-key" value="Generate" onclick="generateKey();">Generate</button>
         </div>
         <div id="balance">
-                <span>100</span>  
+            <span>Balance: </span><span id="balance-value">100</span>  
         </div>
         <div id="transaction">
             <table border="1">
