@@ -74,6 +74,35 @@ class Blockchain {
     return txs;
   }
 
+  checkTransactionExist(transaction)
+  {
+    for (const tx of pendingTransactions) {
+      if (tx.calculateHash() === transaction.calculateHash())
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  checkBlockExist(block)
+  {
+    for (const bl of Blockchain.chain) {
+      if(bl.hash === block.hash)
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  IsValidNextBlock(block)
+  {
+    return block.previousHash === getLatestBlock().hash
+           && block.hash === block.calculateHash() 
+           && block.hasValidTransactions();    
+  }
+
   isChainValid() {
     // Check if the Genesis block hasn't been tampered with
     const realGenesis = JSON.stringify(this.createGenesisBlock());
@@ -102,6 +131,62 @@ class Blockchain {
 
     return true;
   }
+  
+// Listen new TXs
+// When recieve new TXs
+HandleIncomingTx(tx)
+{
+    if (!isChainValid(tx) || checkTransactionExist(tx))
+    {
+        return;
+    }
+    addTransaction(tx);
+    // todo: broadcast the TX to other nodes
+
+    // Start mining if the number of TXs is greater than 2
+    if (pendingTransactions.length() > 2)
+    {
+        // Mine block
+        TYMECoin.minePendingTransactions(myWalletAddress);
+    }
+    // todo: to broadcast new block
+}
+
+// listen new block
+// when recieve new block
+HandleIncomingBlock(block)
+{
+    //Check block is in chain
+    if(!IsValidNextBlock(block))
+    {
+        return;
+    }
+    chain.push(block);
+    //todo: broadcast to other nodes
+}
+
+// Ask for lasted blockchain
+GetBlockchain()
+{
+    // todo: broadcast request
+}
+
+// Listen blockchain info
+UpdateChain(newchain)
+{
+    if(isChainValid(newchain))
+    {
+        chain = newchain;
+    }
+}
+
+// Send lasted blockchain
+// Listen blockchin info request
+SendBlockchain()
+{
+      // todo: broadcast lasted blockchain
+}
+  
 }
 
 module.exports.Blockchain = Blockchain;
