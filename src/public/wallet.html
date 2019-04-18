@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Tyme Coin Wallet!</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>   
+    <script>
+        $(document).ready(function(){
+            $.ajax({
+                url: "/public_key",
+                success: function( result ) {
+                    $("#publicKey").html(result);
+                }
+            });
+
+            $("#publicKey").html("Loading...");
+        });
+    </script>
+</head>
+<body>
+  <div id="content">
+    <div id="head">
+        <img src="../" alt="Tyme header"> 
+    </div>
+    <div id="body">
+        <div id="publicKey"></div>
+        <div id="private"></div>
+        <div id="generate-key">
+            <button id="btn-key" name="btn-key" value="Generate" onclick="generateKey();"/>
+        </div>
+        <div id="balance">
+                <span>100</span>  
+        </div>
+        <div id="transaction">
+            <table border="1">
+                   <tr>
+                       <th>ID</th>
+                       <th>From</th>
+                       <th>To</th>
+                       <th>Amount</th>
+                       <th>Date</th>
+                   </tr> 
+                   <tr>
+                       
+                   </tr>
+            </table>
+
+        </div>
+    </div>  
+
+  </div>
+
+</body>
+
+</html>
