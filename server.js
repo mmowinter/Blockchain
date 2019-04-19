@@ -41,6 +41,10 @@ router.get('/unconfirmed_transactions', function(req,res) {
     res.send(TYMECoin.pendingTransactions);
 });
 
+router.get('/blocks', function(req,res) {
+  res.send(TYMECoin.chain);
+});
+
 router.get('/balance', function(req,res) {
   res.send(TYMECoin.getBalanceOfAddress(req.query.add)+'');
 });

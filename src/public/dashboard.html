@@ -5,13 +5,53 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>   
     <script>
         $( document ).ready(function() {
+            getBlocks();
+            getTransactionHistory();
+        });
+
+        function getTransactionHistory(){
+            let add = $("#public-key").html();
             $.ajax({
                 url: "/unconfirmed_transactions",
                 success: function( result ) {
                     console.log(result);
+                    $("#body-transaction").html("");
+                    for(var i = 0; i < result.length; i ++) {
+                        var item = result[i];
+                        $("#body-transaction").append(
+                            `<tr>
+                            <td>`+ (i + 1)+`</td>
+                            <td>`+item.fromAddress+`</td>
+                            <td>`+item.toAddress+`</td>
+                            <td>`+item.amount+`</td>
+                            <td>`+item.timestamp+`</td>
+                        </tr>`
+                        );
+                    }
                 }
             });
-        });
+        }
+
+        function getBlocks(){
+            $.ajax({
+                url: "/blocks",
+                success: function( result ) {
+                    $("#body-blocks").html("");
+                    for(var i = 0; i < result.length; i ++) {
+                        var item = result[i];
+                        $("#body-blocks").append(
+                            `<tr>
+                            <td>`+item.heigh+`</td>
+                            <td>`+item.timestamp+`</td>
+                            <td>`+item.transactions.length+`</td>
+                            <td>`+item.hash+`</td>
+                            <td>`+item.nonce+`</td>
+                        </tr>`
+                        );
+                    }
+                }
+            });
+        }
 
     </script>
 </head>
@@ -27,31 +67,33 @@
             <table border="1">
                    <tr>
                        <th>Height</th>
-                       <th>Age</th>
+                       <th>Timestamp</th>
                        <th>Transactions</th>
-                       <th>Miner</th>
-                       <th>Miner</th>
-                       <th>Size (bytes)</th>
-                   </tr> 
+                       <th>Hash</th>
+                       <th>Nonce</th>
+                   </tr>
+                   <tbody id="body-blocks">
+                   </tbody >
                    <tr>
                    </tr>
             </table>
         </div>
     </br>
-        <div id="transaction-info">
-            <span>TRANSACTIONS</span>
+    <h2>Unconfirmed Transactions</h2>
+    <div id="transaction">
             <table border="1">
                    <tr>
-                       <th>Transaction Hash</th>
+                       <th>No</th>
                        <th>From</th>
                        <th>To</th>
                        <th>Amount</th>
-                       <th>Time</th>
+                       <th>Timestamp</th>
                    </tr> 
-                   <tr>
-
-                   </tr>
+                   <tbody id="body-transaction">
+                  
+                </tbody>
             </table>
+
         </div>
     </div>  
 
