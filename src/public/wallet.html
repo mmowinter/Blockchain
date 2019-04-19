@@ -37,17 +37,16 @@
             let toAdd = $("#toAddress").val();
             let amount = $("#amount").val();
             let privateKey = $("#private-key").html();
+            $("#error").html('');
 
             $.ajax({
-
                 url: "/createTransaction?fromAdd="+fromAdd+"&toAdd="+toAdd+"&amount="+amount+"&privateKey="+privateKey,
                 success: function( result ) {
                     getTransactionHistory();
                 },
                 error: function(){
-                    alert("Invalid transaction");
+                    $("#error").html('Invalid transaction');
                 }
-                
             });
         } 
 
@@ -116,6 +115,7 @@
                     <td><button onclick="sendCoin();">Send</button></td>
                 </tr>
             </table>
+            <div id="error" style="color: red"></div>
         </div>
 
         <h3>Transaction History</h3>
