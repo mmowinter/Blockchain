@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title> Master Wallet!</title>
+    <link rel="shortcut icon" href="https://media.licdn.com/dms/image/C4E0BAQGZI127XBiX0w/company-logo_200_200/0?e=2159024400&v=beta&t=t8hy0mHoFF2_hmwdZmrsaNPInPKzT5fpbrV8elVxuZ4">
+    <title>Master Wallet</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>   
     <script>
         $( document ).ready(function() {
@@ -60,40 +61,57 @@
 <body>
   <div id="content">
     <div id="head">
-        <img src="../" alt="Tyme header"> 
+        <img src="https://media.licdn.com/dms/image/C4E0BAQGZI127XBiX0w/company-logo_200_200/0?e=2159024400&v=beta&t=t8hy0mHoFF2_hmwdZmrsaNPInPKzT5fpbrV8elVxuZ4" alt="Tyme header">
     </div>
     <div id="body">
-        <span>Tyme Coin Address: </span><br/>
-        <span id="public-key">04be128292e3850bb1ec167835d8dae5be4cec21c38b5951a565205c0597a2f7cff12fcc2626e22769d084576f9267db0b3f3157c0b9382220ad47c21cd180fc8f</span><br/>
-        
-        <span id="private-key" style="display: none">5970ca079d3a4b877e560f8f9f14233299c1b479a95ba1000bd421300bc6cfa5</span>
-        <div id="balance">
-            <span>Balance: </span><span id="balance-value">0</span>  
-        </div>
-        <div id="reload-balance">
-                <button id="btn-balance" name="btn-balance" value="" onclick="getBalance();getTransactionHistory();">Reload </button>
+        <h3>Master Tyme Wallet</h3>
+        <div title="Generate Tyme Wallet" style="margin-top: 20px; padding: 10px; border: 1px solid gray">
+            <span>Tyme Coin Address: </span><br/>
+            <span id="public-key">04be128292e3850bb1ec167835d8dae5be4cec21c38b5951a565205c0597a2f7cff12fcc2626e22769d084576f9267db0b3f3157c0b9382220ad47c21cd180fc8f</span><br/>
+            <span id="private-key" style="display: none">5970ca079d3a4b877e560f8f9f14233299c1b479a95ba1000bd421300bc6cfa5</span>
+            <div id="balance">
+                <span>Balance: </span><span id="balance-value">0</span>
             </div>
-        <div>
-        <div>
-            <span>From: </span><input id="fromAddress" value="04be128292e3850bb1ec167835d8dae5be4cec21c38b5951a565205c0597a2f7cff12fcc2626e22769d084576f9267db0b3f3157c0b9382220ad47c21cd180fc8f" /><br/>
-            <span>To: </span><input id="toAddress"/><br/>
-            <span>Amount: </span><input id="amount"/><br/>
-            <button onclick="sendCoin();">Submit</button>
         </div>
-        <div id="transaction">
-            <table border="1">
-                   <tr>
-                       <th>No</th>
-                       <th>From</th>
-                       <th>To</th>
-                       <th>Amount</th>
-                       <th>Date</th>
-                   </tr> 
-                   <tbody id="body-transaction">
-                  
-                </tbody>
-            </table>
 
+        <h3>Send Transaction</h3>
+        <div title="Send Transaction" style="margin-top: 20px; padding: 10px; border: 1px solid gray">
+            <table style="border: 1px solid gray;">
+                <tr>
+                    <td>From:</td>
+                    <td><input id="fromAddress" value="04be128292e3850bb1ec167835d8dae5be4cec21c38b5951a565205c0597a2f7cff12fcc2626e22769d084576f9267db0b3f3157c0b9382220ad47c21cd180fc8f" size="50" style="color: gray"/></td>
+                </tr>
+                <tr>
+                    <td>To:</td>
+                    <td><input id="toAddress" size="50"/></td>
+                </tr>
+                <tr>
+                    <td>Amount:</td>
+                    <td><input id="amount" size="50"/></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button onclick="sendCoin();">Send</button></td>
+                </tr>
+            </table>
+        </div>
+
+        <h3>Transaction History</h3>
+        <div id="transaction" title="Transaction History" style="margin-top: 20px; padding: 10px; border: 1px solid gray">
+            <div id="reload-balance">
+                <button id="btn-balance" name="btn-balance" value="" onclick="getBalance();getTransactionHistory();">Refresh</button>
+            </div>
+            <br>
+            <table border="1">
+                <tr>
+                    <th style="width: 40px">No</th>
+                    <th style="width: 300px">From</th>
+                    <th style="width: 300px">To</th>
+                    <th style="width: 200px">Amount</th>
+                    <th style="width: 200px">Date</th>
+                </tr>
+                <tbody id="body-transaction"></tbody>
+            </table>
         </div>
     </div>  
 
