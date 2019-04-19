@@ -43,9 +43,13 @@
                 url: "/createTransaction?fromAdd="+fromAdd+"&toAdd="+toAdd+"&amount="+amount+"&privateKey="+privateKey,
                 success: function( result ) {
                     getTransactionHistory();
+                },
+                error: function(){
+                    alert("Invalid transaction");
                 }
+                
             });
-        }
+        } 
 
         function getTransactionHistory(){
             let add = $("#public-key").html();
