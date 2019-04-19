@@ -1,26 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title> Tyme Coin Wallet!</title>
+    <title> Master Wallet!</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>   
     <script>
-        function generateKey(){
-            $.ajax({
-                url: "/public_key",
-                success: function( result ) {
-                    $("#public-key").html(result[0]);
-                    // $("#public-key").html("04be128292e3850bb1ec167835d8dae5be4cec21c38b5951a565205c0597a2f7cff12fcc2626e22769d084576f9267db0b3f3157c0b9382220ad47c21cd180fc8f");
-                    $("#private-key").html(result[1]);
-                    $("#fromAddress").val(result[0]);
-                    getBalance();
-                    getTransactionHistory();
-                }
-            });
-
-            $("#public-key").html("Loading...");
-            $("#private-key").html("Loading...");
-        }
-
+        $( document ).ready(function() {
+            getBalance();
+            getTransactionHistory();
+        });
         function getBalance(){
             let add = $("#public-key").html();
             $.ajax({
@@ -63,7 +50,6 @@
                         </tr>`
                         );
                     }
-                    // $("#balance-value").html(result);
                 }
             });
         }
@@ -77,20 +63,14 @@
     </div>
     <div id="body">
         <span>Tyme Coin Address: </span><br/>
-        <span id="public-key"></span><br/>
+        <span id="public-key">04be128292e3850bb1ec167835d8dae5be4cec21c38b5951a565205c0597a2f7cff12fcc2626e22769d084576f9267db0b3f3157c0b9382220ad47c21cd180fc8f</span><br/>
         
-        <span id="private-key" style="display: none"></span>
-        <div id="generate-key">
-            <button id="btn-key" name="btn-key" value="Generate" onclick="generateKey();">Generate</button>
-        </div>
+        <span id="private-key" style="display: none">5970ca079d3a4b877e560f8f9f14233299c1b479a95ba1000bd421300bc6cfa5</span>
         <div id="balance">
             <span>Balance: </span><span id="balance-value">0</span>  
         </div>
-        <div id="reload-balance">
-                <button id="btn-balance" name="btn-balance" value="" onclick="getBalance();">Reload </button>
-            </div>
         <div>
-            <span>From: </span><input id="fromAddress"/><br/>
+            <span>From: </span><input id="fromAddress" value="04be128292e3850bb1ec167835d8dae5be4cec21c38b5951a565205c0597a2f7cff12fcc2626e22769d084576f9267db0b3f3157c0b9382220ad47c21cd180fc8f" /><br/>
             <span>To: </span><input id="toAddress"/><br/>
             <span>Amount: </span><input id="amount"/><br/>
             <button onclick="sendCoin();">Submit</button>

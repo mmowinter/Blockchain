@@ -57,6 +57,7 @@ class Blockchain {
   }
 
   getBalanceOfAddress(address) {
+    
     let balance = 0;
 
     for (const block of this.chain) {
@@ -70,7 +71,7 @@ class Blockchain {
         }
       }
     }
-
+    console.log(balance);
     return balance;
   }
 
@@ -84,6 +85,14 @@ class Blockchain {
         }
       }
     }
+
+      if(this.pendingTransactions){
+          for (const pendingTx of this.pendingTransactions) {
+            if (pendingTx.fromAddress === address || pendingTx.toAddress === address) {
+              txs.push(pendingTx);
+            }
+          }
+      }
 
     return txs;
   }

@@ -28,7 +28,7 @@ class Transaction {
      // Checks if the signature is valid
     isValid() {
       let genesisAdd = '04be128292e3850bb1ec167835d8dae5be4cec21c38b5951a565205c0597a2f7cff12fcc2626e22769d084576f9267db0b3f3157c0b9382220ad47c21cd180fc8f';
-      if (this.fromAddress === null && this.toAddress === genesisAdd) 
+      if (this.fromAddress === genesisAdd) 
       return true;
   
       if (!this.signature || this.signature.length === 0) {
